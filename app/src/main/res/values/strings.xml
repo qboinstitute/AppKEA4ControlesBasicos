@@ -15,4 +15,8 @@
     <string name="valbtnregistrar">REGISTRAR PERSONA</string>
     <string name="valbtnlistarpersonas">VER LISTADO DE PERSONAS</string>
     <string name="valtitulolista">LISTADO DE PERSONAS</string>
+    <string name="erroNombreApellido">Nombres y apellidos son obligatorios.</string>
+    <string name="errorgenero">La selección del genero es obligatoria.</string>
+    <string name="errorestadocivil">Es obligatorio seleccionar el estado civil.</string>
+    <string name="errorpreferencias">Es obligatorio seleccionar al menos una preferencia.</string>
 </resources>
