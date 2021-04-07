@@ -11,4 +11,7 @@
     <string name="valchkdeporte">Deporte</string>
     <string name="valchkdibujo">Dibujo y arte</string>
     <string name="valchkotros">Otras preferencias</string>
+    <string name="valswemail">Notificar por email?</string>
+    <string name="valbtnregistrar">REGISTRAR PERSONA</string>
+    <string name="valbtnlistarpersonas">VER LISTADO DE PERSONAS</string>
 </resources>
