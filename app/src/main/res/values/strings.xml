@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AppKEA4ControlesBasicos</string>
+    <string name="valtituloregistro">REGISTRO DE PERSONA</string>
+    <string name="valetnombre">Ingrese su nombre</string>
+    <string name="valetapellido">Ingrese su apellido</string>
+    <string name="valtvgenero">Seleccione su género:</string>
+    <string name="valrbtnmasculino">Masculino</string>
+    <string name="valrbtnfemenino">Femenino</string>
 </resources>
