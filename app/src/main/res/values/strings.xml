@@ -6,4 +6,9 @@
     <string name="valtvgenero">Seleccione su género:</string>
     <string name="valrbtnmasculino">Masculino</string>
     <string name="valrbtnfemenino">Femenino</string>
+    <string name="valtvestadocivil">Seleccione su estado civil:</string>
+    <string name="valtvpreferencias">Seleccione sus preferencias:</string>
+    <string name="valchkdeporte">Deporte</string>
+    <string name="valchkdibujo">Dibujo y arte</string>
+    <string name="valchkotros">Otras preferencias</string>
 </resources>
