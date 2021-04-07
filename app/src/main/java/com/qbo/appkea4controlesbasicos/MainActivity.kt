@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.qbo.appkea4controlesbasicos.databinding.ActivityMainBinding
+import java.util.ArrayList
 
-class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, View.OnClickListener {
 
     private lateinit var binding : ActivityMainBinding
     private var estadoCivil = ""
+    private val listaPreferencias = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +33,34 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             binding.spestadocivil.adapter = adapter
         }
         binding.spestadocivil.onItemSelectedListener = this
+        binding.btnregistrar.setOnClickListener(this)
+        binding.btnlistarpersonas.setOnClickListener(this)
+        binding.chkdeporte.setOnClickListener(this)
+        binding.chkdibujo.setOnClickListener(this)
+        binding.chkotros.setOnClickListener(this)
 
+    }
+
+    fun agregarQuitarPreferenciaSeleccionada(vista : View){
+        val checkBox = vista as CheckBox
+        if(checkBox.isChecked){
+            listaPreferencias.add(checkBox.text.toString())
+        }else{
+            listaPreferencias.remove(checkBox.text.toString())
+        }
+    }
+
+    fun obtenerGeneroSeleccionado(): String{
+        var genero = ""
+        when(binding.rggenero.checkedRadioButtonId){
+            R.id.rbtnmasculino -> {
+                genero = binding.rbtnmasculino.text.toString()
+            }
+            R.id.rbtnfemenino -> {
+                genero = binding.rbtnfemenino.text.toString()
+            }
+        }
+        return genero
     }
 
     fun validarFormulario(vista: View): Boolean{
@@ -106,5 +136,16 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("Not yet implemented")
+    }
+
+    override fun onClick(v: View?) {
+        if(v!! is CheckBox){
+            agregarQuitarPreferenciaSeleccionada(v!!)
+        }else{
+            when(v!!.id){
+                R.id.btnregistrar -> validarFormulario(v!!)
+                R.id.btnlistarpersonas -> enviarMensajeError(v!!, "Falta programar")
+            }
+        }
     }
 }
