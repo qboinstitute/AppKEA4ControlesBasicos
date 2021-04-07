@@ -1,5 +1,6 @@
 package com.qbo.appkea4controlesbasicos
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, Vi
     private lateinit var binding : ActivityMainBinding
     private var estadoCivil = ""
     private val listaPreferencias = ArrayList<String>()
+    private val listaPersonas = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,40 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, Vi
         binding.chkdibujo.setOnClickListener(this)
         binding.chkotros.setOnClickListener(this)
 
+    }
+    fun registrarPersona(vista : View){
+        if(validarFormulario(vista)){
+            val infoPersona = binding.etnombre.text.toString() + " " +
+                    binding.etapellido.text.toString() + " " +
+                    obtenerGeneroSeleccionado() + " " +
+                    obtenerPreferenciasSeleccionadas() + " " +
+                    estadoCivil + " " +
+                    binding.swemail.isChecked
+            listaPersonas.add(infoPersona)
+            setearControles()
+        }
+    }
+
+    fun setearControles(){
+        listaPreferencias.clear()
+        binding.etnombre.setText("")
+        binding.etapellido.setText("")
+        binding.swemail.isChecked = false
+        binding.chkdeporte.isChecked = false
+        binding.chkdibujo.isChecked = false
+        binding.chkotros.isChecked = false
+        binding.rggenero.clearCheck()
+        binding.spestadocivil.setSelection(0)
+        binding.etnombre.isFocusableInTouchMode = true
+        binding.etnombre.requestFocus()
+    }
+
+    fun obtenerPreferenciasSeleccionadas(): String{
+        var preferencias = ""
+        for(pref in listaPreferencias){
+            preferencias += "$pref -"
+        }
+        return preferencias
     }
 
     fun agregarQuitarPreferenciaSeleccionada(vista : View){
@@ -126,6 +162,15 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, Vi
         snackbar.show()
     }
 
+    fun irListaPersonas(){
+        val intentLista = Intent(
+            this, ListaActivity::class.java
+        ).apply {
+            putExtra("listapersonas", listaPersonas)
+        }
+        startActivity(intentLista)
+    }
+
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         estadoCivil = if(position > 0){
             parent!!.getItemAtPosition(position).toString()
@@ -143,8 +188,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, Vi
             agregarQuitarPreferenciaSeleccionada(v!!)
         }else{
             when(v!!.id){
-                R.id.btnregistrar -> validarFormulario(v!!)
-                R.id.btnlistarpersonas -> enviarMensajeError(v!!, "Falta programar")
+                R.id.btnregistrar -> registrarPersona(v!!)
+                R.id.btnlistarpersonas -> irListaPersonas()
             }
         }
     }
